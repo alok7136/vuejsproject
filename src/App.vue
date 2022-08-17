@@ -33,9 +33,11 @@
   <h1>{{ bindvalue }}</h1>
   <input type="text" v-model="bindvalue" />
   <h1 v-bind:style="{ background: 'lightblue' }">
-    Send Props In Child using Array with data method..
+    Send Props In Child using Array with data method(Parent to Child)
   </h1>
-  <ChildComponent v-bind:userdata="users" />
+  <h2>{{title}}</h2>
+  <ChildComponent v-bind:userdata="users" v-on:updateTitleEvent="updateTitle($event)"/>
+ 
 </template>
 
 <script>
@@ -57,10 +59,15 @@ export default {
     showStyle() {
       this.visibility = !this.visibility;
     },
+    updateTitle(eventValue){
+      this.title = eventValue;
+
+    },
   },
   data() {
     return {
       show: false,
+       title :"this is a Parent title",
       usersData: [
         {
           name: "alok",
@@ -104,6 +111,7 @@ export default {
         },
       ],
     };
+   
   },
 };
 </script>
